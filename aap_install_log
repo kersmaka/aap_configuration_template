@@ -1,0 +1,39 @@
+ansible-playbook [core 2.14.17]
+  config file = /home/admin/github/aap_configuration_template/ansible.cfg
+  configured module search path = ['/home/admin/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/lib/python3.9/site-packages/ansible
+  ansible collection location = /home/admin/.ansible/collections:/usr/share/ansible/collections
+  executable location = /bin/ansible-playbook
+  python version = 3.9.21 (main, Dec  5 2024, 00:00:00) [GCC 11.5.0 20240719 (Red Hat 11.5.0-2)] (/usr/bin/python3)
+  jinja version = 3.1.2
+  libyaml = True
+Using /home/admin/github/aap_configuration_template/ansible.cfg as config file
+host_list declined parsing /home/admin/github/aap_configuration_template/inventory_dev.yml as it did not pass its verify_file() method
+script declined parsing /home/admin/github/aap_configuration_template/inventory_dev.yml as it did not pass its verify_file() method
+Parsed /home/admin/github/aap_configuration_template/inventory_dev.yml inventory source with yaml plugin
+Skipping callback 'default', as we already have a stdout callback.
+Skipping callback 'minimal', as we already have a stdout callback.
+Skipping callback 'oneline', as we already have a stdout callback.
+
+PLAYBOOK: install_aap.yml ******************************************************
+1 plays in playbooks/install_aap.yml
+skipping vars_file '../vaults/{{ env }}.yml' due to an undefined variable
+skipping vars_file '../vaults/{{ env }}.yml' due to an undefined variable
+skipping vars_file '../vaults/{{ env }}.yml' due to an undefined variable
+
+PLAY [Playbook to configure ansible automation platform installation] **********
+Read vars_file '../vaults/{{ env }}.yml'
+
+TASK [Gathering Facts] *********************************************************
+task path: /home/admin/github/aap_configuration_template/playbooks/install_aap.yml:2
+Read vars_file '../vaults/{{ env }}.yml'
+<127.0.0.1> ESTABLISH SSH CONNECTION FOR USER: None
+<127.0.0.1> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/admin/.ansible/cp/21f0e6a9ae"' 127.0.0.1 '/bin/sh -c '"'"'echo ~ && sleep 0'"'"''
+<HERE> ESTABLISH SSH CONNECTION FOR USER: None
+<HERE> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o ConnectTimeout=10 -o 'ControlPath="/home/admin/.ansible/cp/afb75257a9"' HERE '/bin/sh -c '"'"'echo ~ && sleep 0'"'"''
+<HERE> (255, b'', b'ssh: Could not resolve hostname here: Name or service not known\r\n')
+fatal: [HERE]: UNREACHABLE! => {
+    "changed": false,
+    "msg": "Failed to connect to the host via ssh: ssh: Could not resolve hostname here: Name or service not known",
+    "unreachable": true
+}

@@ -1,7 +1,7 @@
 ---
 aap_setup_down_offline_token: "{{ offline_token }}"
-aap_setup_down_version: 2.4
-aap_setup_rhel_version: 8
+aap_setup_down_version: 2.5
+aap_setup_rhel_version: 9
 # aap_setup_down_dest_dir: /tmp/
 # aap_setup_down_type: setup # default is bundle
 
@@ -56,6 +56,15 @@ aap_setup_prep_inv_vars:
     # automation_controller_main_url = ''
     # automationedacontroller_controller_verify_ssl = true
     postgres_use_ssl: false
+    # I needed to manually add these
+    postgresql_admin_password: "{{ ansible_password | default('Password1234!') }}"
+    redis_mode: standalone
+    controller_admin_password: "{{ ansible_password | default('Password1234!') }}"
+    controller_pg_host: "{{ aap_db_host | default(aap_setup_prep_inv_nodes['database'][0]) }}"
+    controller_pg_password: "{{ ansible_password | default('Password1234!') }}"
+    hub_admin_password: "redhat"
+    hub_pg_host: "{{ ah_db_host | default(aap_setup_prep_inv_nodes['database'][1]) | default(aap_setup_prep_inv_nodes['database'][0]) }}"
+    hub_pg_password: "redhat"
     # postgres_ssl_cert: /path/to/pgsql.crt
     # postgres_ssl_key: /path/to/pgsql.key
     # sso_console_admin_username: 'admin'
@@ -63,7 +72,8 @@ aap_setup_prep_inv_vars:
 aap_setup_prep_inv_secrets:
 
 # aap_setup_inst_setup_dir: "{{ aap_setup_prep_setup_dir }}"
-# aap_setup_inst_inventory: inventory
+# this option needs to be commented out and an inventory set:
+aap_setup_inst_inventory: /home/admin/github/aap_configuration_template/inventory-growth
 aap_setup_inst_extra_vars:
   create_preload_data: false
 # controller_hostname/username/password/validate_certs: ???????????????????????
@@ -82,4 +92,5 @@ ah_username: "{{ ah_username | default('admin') }}"
 ah_password: "{{ ansible_password | default('Password1234!') }}"
 # ah_oauthtoken: ""
 ah_validate_certs: false
-...
+# Download containerized installer
+aap_setup_containerized: true
