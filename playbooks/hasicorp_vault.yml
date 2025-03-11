@@ -1,0 +1,28 @@
+---
+- name: Get Vault secret data
+  uri:
+    url: "https://10.0.0.184:8200/v1/ansible_containerized/data/ansible_credentials"
+    method: GET
+    headers:
+      X-Vault-Token: "{{ token }}"
+    validate_certs: false  # Use with caution in production!
+    return_content: yes
+  register: vault_result
+
+- name: Set facts for each key/value pair
+  set_fact:
+    "{{ item.key | regex_replace('[-.]', '_') }}": "{{ item.value }}"  # Replace hyphens and periods with underscores, add prefix
+  loop: "{{ vault_result.json.data.data | dict2items }}"  # Iterate through key/value pairs
+  when: vault_result is defined and vault_result.json.data.data is defined
+
+- name: Display the results (optional)
+  ansible.builtin.debug:
+    msg: "ssh_key: {{ ah_pass }}"  
+
+- name: assign value to rhel95
+  ansible.builtin.set_fact:
+    group_name: "{{ vault_result.json.data.data[group_name] }}"
+
+- name: Display group variable name
+  ansible.builtin.debug:
+    msg: "group name: {{ group_name }}"   
