@@ -18,6 +18,6 @@
         name: infra.aap_utilities.aap_setup_install
     
     - name: setup hasicorp_vault
-      roles:
-        - roles: hasicorp_vault
+      ansible.builtin.include_role:
+        name: hasicorp_vault
 ...
