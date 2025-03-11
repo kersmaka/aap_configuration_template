@@ -15,7 +15,7 @@
 
     - name: setup hasicorp_vault
       ansible.builtin.include_role:
-        name: hasicorp_vault    
+        name: hasicorp_vault
 
     - name: Include aap_setup_install role
       ansible.builtin.include_role:
