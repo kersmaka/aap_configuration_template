@@ -12,7 +12,15 @@
       ansible.builtin.include_role:
         name: infra.aap_utilities.aap_setup_prepare
 
+    - name: Debug registry credentials # Added debug task
+      debug:
+        msg: "Registry Username: {{ registry_username }}, Registry Password: {{ registry_password }}"
+
     - name: Include aap_setup_install role
       ansible.builtin.include_role:
         name: infra.aap_utilities.aap_setup_install
+      with_vars:
+        registry_username: "{{ registry_username }}"
+        registry_password: "{{ registry_password }}"
+        env: "{{ env }}" # Ensure env is passed
 ...
