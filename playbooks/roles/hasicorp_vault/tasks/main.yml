@@ -2,7 +2,7 @@
 # tasks file for hasicorp_vault
 - name: Get Vault secret data
   uri:
-    url: "https://10.0.0.184:8200/v1/ansible_containerized/data/ansible_credentials"
+    url: "https://192.168.0.225:8200/v1/ansible_containerized/data/ansible_credentials"
     method: GET
     headers:
       X-Vault-Token: "{{ token }}"
